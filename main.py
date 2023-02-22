@@ -3,12 +3,12 @@ import cv2
 import pyzbar.pyzbar as pyzbar
 import time
 
-# import pymongo
-# from pymongo import MongoClient 
+import pymongo
+from pymongo import MongoClient 
 
-# cluster = MongoClient("mongodb+srv://root:toor@cluster0.varlalw.mongodb.net/?retryWrites=true&w=majorityy")
-# db = cluster["gg"]
-# collection = db["123"]
+cluster = MongoClient("mongodb+srv://root:toor@cluster0.varlalw.mongodb.net/?retryWrites=true&w=majorityy")
+db = cluster["gg"]
+collection = db["123"]
 
 app = Flask(__name__)
 
@@ -31,9 +31,9 @@ def gen_frames():
             barcode_type = barcode.type
 
             # print("[INFO] Found {} barcode: {}".format(barcode_type, barcode_data))
-            # collection.insert_one({"_id":barcode_data})
-            with open("barcode_result.txt", mode ='w') as file:
-               file.write("Recognized Barcode:" + barcode_data)
+            collection.insert_one({"_id":barcode_data})
+            #with open("barcode_result.txt", mode ='w') as file:
+            #  file.write("Recognized Barcode:" + barcode_data)
             # cv2.rectangle(frame, (x, y),(x+w, y+h), (0, 255, 0), 2)
         
             # font = cv2.FONT_HERSHEY_DUPLEX
